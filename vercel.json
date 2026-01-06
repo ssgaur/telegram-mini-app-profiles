@@ -1,8 +1,9 @@
 {
   "version": 2,
+  "name": "telegram-mini-app-profiles",
   "buildCommand": "pnpm build",
-  "outputDirectory": "./dist/public",
-  "installCommand": "pnpm install",
+  "outputDirectory": "dist/public",
+  "framework": null,
   "env": {
     "NODE_ENV": "production"
   },
@@ -10,9 +11,16 @@
     {
       "src": "/assets/(.*)",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
+        "cache-control": "public, max-age=31536000, immutable"
       },
       "dest": "/assets/$1"
+    },
+    {
+      "src": "/index.html",
+      "headers": {
+        "cache-control": "public, max-age=0, must-revalidate"
+      },
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
