@@ -184,4 +184,13 @@
       max-width: 1280px; /* Standard content width */
     }
   }
+
+  /* Safe area insets for mobile devices with notches */
+  .h-safe-area-inset-bottom {
+    height: env(safe-area-inset-bottom, 0px);
+  }
+
+  .pb-safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }

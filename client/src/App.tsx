@@ -1,21 +1,33 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
+import Profiles from "./pages/Profiles";
+import Annotate from "./pages/Annotate";
+import Future from "./pages/Future";
+import { BottomNavigation } from "./components/BottomNavigation";
 import { useEffect } from "react";
 
 
 function Router() {
+  const [location] = useLocation();
+  // Show bottom nav on main routes, hide on 404 and other error pages
+  const showBottomNav = location === "/" || location === "/annotate" || location === "/future";
+
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <Switch>
+        <Route path={"/"} component={Profiles} />
+        <Route path={"/annotate"} component={Annotate} />
+        <Route path={"/future"} component={Future} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+      {showBottomNav && <BottomNavigation />}
+    </>
   );
 }
 
